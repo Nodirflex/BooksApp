@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  BooksApp
+
+  Created by Nodir on 24/12/22.
+  
+*/
+"search_title" = "Поиск";
+"favorites_title" = "Избранное";
+"empty_list_title" = "Список пуст";
+"empty_search_title" = "Ничего не найдено";
+"error_title" = "Ошибка";
+"ok_title" = "ОК";
+"save_error_message" = "Не удалось сохранить книгу в избранное";
+"fetch_error_message" = "Не удалось получить книги из избранного";
+"delete_error_message" = "Не удалось удалить книгу из избранного";
+"sample_action_title" = "Фрагмент";
+"no_more_favorite_action_title" = "Больше не избранное";
+"add_to_favorite_title" = "Добавить в избранное";

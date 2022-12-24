@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  BooksApp
+
+  Created by Nodir on 24/12/22.
+  
+*/
+"search_title" = "Search";
+"favorites_title" = "Favorites";
+"empty_list_title" = "The list is empty";
+"empty_search_title" = "Nothing found";
+"error_title" = "Error";
+"ok_title" = "OK";
+"save_error_message" = "Failed to save the book to Favorites";
+"fetch_error_message" = "Failed to get books from Favorites";
+"delete_error_message" = "Unable to remove book from Favorites";
+"sample_action_title" = "Get Sample";
+"no_more_favorite_action_title" = "No more favorites";
+"add_to_favorite_title" = "Add to favorites";
