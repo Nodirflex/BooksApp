@@ -14,6 +14,7 @@
 "save_error_message" = "Failed to save the book to Favorites";
 "fetch_error_message" = "Failed to get books from Favorites";
 "delete_error_message" = "Unable to remove book from Favorites";
-"sample_action_title" = "Get Sample";
-"no_more_favorite_action_title" = "No more favorites";
+"sample_action_title" = "Get Fragment";
+"no_more_favorite_action_title" = "Delete from favorites";
 "add_to_favorite_title" = "Add to favorites";
+"invalid_open_fragment_url" = "Unable to open URL";

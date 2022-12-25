@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit.UIApplication
 
 final class FavoritesViewModel: BooksViewModelProtocol {
     
@@ -15,6 +16,7 @@ final class FavoritesViewModel: BooksViewModelProtocol {
     
     var bookItems = CurrentValueSubject<[VolumeItem], Never>([])
     var errorMessageSubject = PassthroughSubject<String, Never>()
+    var openURLSubject = PassthroughSubject<URL, Never>()
     
     init(storage: DataStorageServiceProtocol) {
         self.storage = storage
@@ -38,6 +40,19 @@ final class FavoritesViewModel: BooksViewModelProtocol {
         } catch {
             errorMessageSubject.send(AppError.unknown.message)
         }
+    }
+    
+    func openURL(for id: String) {
+        guard
+            let previewLink = bookItems.value.first(where: { $0.id == id })?.volumeInfo.previewLink,
+            let url = URL(string: previewLink),
+            UIApplication.shared.canOpenURL(url)
+        else {
+            errorMessageSubject.send(.localized(.invalidOpenFragmentUrl))
+            return
+        }
+        
+        openURLSubject.send(url)
     }
     
     private func fetch() {

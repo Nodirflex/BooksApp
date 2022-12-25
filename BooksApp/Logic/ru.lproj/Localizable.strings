@@ -15,5 +15,6 @@
 "fetch_error_message" = "Не удалось получить книги из избранного";
 "delete_error_message" = "Не удалось удалить книгу из избранного";
 "sample_action_title" = "Фрагмент";
-"no_more_favorite_action_title" = "Больше не избранное";
+"no_more_favorite_action_title" = "Удалить из избранного";
 "add_to_favorite_title" = "Добавить в избранное";
+"invalid_open_fragment_url" = "Не удалось открыть ссылку";

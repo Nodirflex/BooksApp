@@ -7,12 +7,15 @@
 
 import Foundation
 import Combine
+import UIKit.UIApplication
 
 protocol BooksViewModelProtocol: AnyObject {
     var bookItems: CurrentValueSubject<[VolumeItem], Never> { get }
     var errorMessageSubject: PassthroughSubject<String, Never> { get }
+    var openURLSubject: PassthroughSubject<URL, Never> { get }
     
     func changeFavoriteState(for id: String)
+    func openURL(for id: String)
 }
 
 protocol SearchBooksViewModelProtocol: BooksViewModelProtocol {
@@ -36,6 +39,7 @@ final class SearchBooksViewModel: SearchBooksViewModelProtocol {
     var reloadItem = PassthroughSubject<VolumeItem, Never>()
     var isFetching = PassthroughSubject<Bool, Never>()
     var errorMessageSubject = PassthroughSubject<String, Never>()
+    var openURLSubject = PassthroughSubject<URL, Never>()
     
     init(booksService: BooksServiceProtocol, storage: DataStorageServiceProtocol) {
         self.booksService = booksService
@@ -81,6 +85,19 @@ final class SearchBooksViewModel: SearchBooksViewModelProtocol {
         if shouldReloadItem {
             reloadItem.send(item)
         }
+    }
+    
+    func openURL(for id: String) {
+        guard
+            let previewLink = bookItems.value.first(where: { $0.id == id })?.volumeInfo.previewLink,
+            let url = URL(string: previewLink),
+            UIApplication.shared.canOpenURL(url)
+        else {
+            errorMessageSubject.send(.localized(.invalidOpenFragmentUrl))
+            return
+        }
+        
+        openURLSubject.send(url)
     }
     
     private func setupBindings() {

@@ -112,6 +112,10 @@ final class SearchBookViewController: UIViewController, BookDetailRouter {
         viewModel.errorMessageSubject.sink { [weak self] message in
             self?.showAlert(with: message)
         }.store(in: &subscriptions)
+        
+        viewModel.openURLSubject.sink { url in
+            UIApplication.shared.open(url)
+        }.store(in: &subscriptions)
     }
     
     @objc private func searchTyped(_ sender: UISearchBar) {
@@ -197,10 +201,7 @@ extension SearchBookViewController: BookItemCellDelegate {
     }
     
     func downloadSample(for id: String) {
-        guard let previewLink = viewModel.bookItems.value.first(where: { $0.id == id })?.volumeInfo.previewLink else {
-            return
-        }
-        UIApplication.shared.open(URL(string: previewLink)!)
+        viewModel.openURL(for: id)
     }
     
 }
