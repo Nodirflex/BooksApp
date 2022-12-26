@@ -3,4 +3,70 @@
    uuid = "DB20D791-9CE3-40C8-952C-E0B11E9532BD"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F41F92FD-FC5D-4EAB-B2FD-E00569CED607"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BooksApp/UI/BookDetail/BookDetailViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "openURL()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C52372E-5682-4AEF-9194-B25F3F0E16B8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BooksApp/UI/BookDetail/BookDetailViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "openURL()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8C52372E-5682-4AEF-9194-B25F3F0E16B8 - d2028ea474514de0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BooksApp.BookDetailViewModel.openURL() -&gt; ()"
+                  moduleName = "BooksApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nodir/Documents/xcodeprojects/BooksApp/BooksApp/UI/BookDetail/BookDetailViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "8C52372E-5682-4AEF-9194-B25F3F0E16B8 - d2028ea474514de0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BooksApp.BookDetailViewModel.openURL() -&gt; ()"
+                  moduleName = "BooksApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nodir/Documents/xcodeprojects/BooksApp/BooksApp/UI/BookDetail/BookDetailViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "276">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

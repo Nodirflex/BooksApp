@@ -18,3 +18,4 @@
 "no_more_favorite_action_title" = "Удалить из избранного";
 "add_to_favorite_title" = "Добавить в избранное";
 "invalid_open_fragment_url" = "Не удалось открыть ссылку";
+"search_placeholder_text" = "Введите автора или название книги";

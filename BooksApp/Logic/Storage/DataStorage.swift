@@ -45,6 +45,7 @@ final class DataStorageService: NSObject, DataStorageServiceProtocol {
         savingItem.isFavorite = item.isFavorite
         savingItem.image = item.image
         savingItem.bookDescription = item.volumeInfo.description
+        savingItem.previewLink = item.volumeInfo.previewLink
         
         do {
             try moc.save()

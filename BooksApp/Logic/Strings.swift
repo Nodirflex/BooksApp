@@ -21,6 +21,7 @@ enum Strings: String {
     case noMoreFavoriteActionTitle = "no_more_favorite_action_title"
     case addToFavoriteTitle = "add_to_favorite_title"
     case invalidOpenFragmentUrl = "invalid_open_fragment_url"
+    case searchPlaceholderText = "search_placeholder_text"
 }
 
 extension String {

@@ -17,6 +17,7 @@ final class SearchBookViewController: UIViewController, BookDetailRouter {
         searchBar.returnKeyType = .done
         searchBar.enablesReturnKeyAutomatically = false
         searchBar.searchTextField.delegate = self
+        searchBar.placeholder = .localized(.searchPlaceholderText)
         return searchBar
     }()
     

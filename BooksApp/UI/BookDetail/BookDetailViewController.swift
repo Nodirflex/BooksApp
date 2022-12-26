@@ -56,6 +56,34 @@ final class BookDetailViewController: UIViewController {
         return textView
     }()
     
+    private var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(favoriteAction), for: .touchUpInside)
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .systemBlue
+        return button
+    }()
+    
+    private lazy var fragmentButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(.localized(.sampleActionTitle), for: .normal)
+        button.addTarget(self, action: #selector(fragmentAction), for: .touchUpInside)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 8
+        return button
+    }()
+    
     private var subscriptions = Set<AnyCancellable>()
     
     private let viewModel: BookDetailViewModelProtocol
@@ -75,6 +103,7 @@ final class BookDetailViewController: UIViewController {
         super.viewDidLoad()
         prepareLayout()
         setData()
+        setupBindings()
     }
     
     private func prepareLayout() {
@@ -95,17 +124,29 @@ final class BookDetailViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -20),
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
         
         stackView.addArrangedSubview(bookImageView)
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(descriptionTextView)
         
         NSLayoutConstraint.activate([
             bookImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
             bookImageView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+        
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(descriptionTextView)
+        stackView.addArrangedSubview(buttonsStackView)
+        
+        buttonsStackView.addArrangedSubview(fragmentButton)
+        buttonsStackView.addArrangedSubview(favoriteButton)
+        
+        NSLayoutConstraint.activate([
+            fragmentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            fragmentButton.heightAnchor.constraint(equalToConstant: 44),
+            favoriteButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 44)
         ])
         
     }
@@ -115,20 +156,48 @@ final class BookDetailViewController: UIViewController {
         titleLabel.text = viewModel.item.volumeInfo.title
         descriptionTextView.text = viewModel.item.volumeInfo.description
         
-        imageService.fetchImage(for: viewModel.item.image).sink(receiveCompletion: { [weak bookImageView] completion in
+        imageService.fetchImage(for: viewModel.item.image)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak bookImageView] completion in
             switch completion {
             case .failure:
-                DispatchQueue.main.async {
-                    bookImageView?.image = .bookClosed
-                }
+                bookImageView?.image = .bookClosed
             default:
                 break
             }
         }, receiveValue: { [weak bookImageView] image in
-            DispatchQueue.main.async {
-                bookImageView?.image = image
-            }
+            bookImageView?.image = image
         }).store(in: &subscriptions)
+    }
+    
+    private func setupBindings() {
+        viewModel.errorMessageSubject.sink { [weak self] message in
+            self?.showAlert(with: message)
+        }.store(in: &subscriptions)
+        
+        viewModel.openURLSubject.sink { url in
+            UIApplication.shared.open(url)
+        }.store(in: &subscriptions)
+        
+        viewModel.isFavoriteState.sink { [weak self] state in
+            self?.renderState(isFavorite: state)
+        }.store(in: &subscriptions)
+    }
+    
+    private func renderState(isFavorite: Bool) {
+        if isFavorite {
+            favoriteButton.setTitle(.localized(.noMoreFavoriteActionTitle), for: .normal)
+        } else {
+            favoriteButton.setTitle(.localized(.addToFavoriteTitle), for: .normal)
+        }
+    }
+    
+    @objc private func fragmentAction() {
+        viewModel.openURL()
+    }
+    
+    @objc private func favoriteAction() {
+        viewModel.changeState()
     }
 
 }

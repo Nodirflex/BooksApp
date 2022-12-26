@@ -41,7 +41,8 @@ extension DependencyContainer {
     }
     
     func bookDetailVM(item: VolumeItem) -> BookDetailViewModelProtocol {
-        let bookDetailVM = BookDetailViewModel(item: item)
+        let storage = DependencyContainer.shared.storage
+        let bookDetailVM = BookDetailViewModel(item: item, storage: storage)
         return bookDetailVM
     }
     
